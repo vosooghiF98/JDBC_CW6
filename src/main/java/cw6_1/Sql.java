@@ -42,12 +42,23 @@ public class Sql {
     }
 
     public void updateData() throws SQLException {
-        query = "update maktab.public.users set password = ? where id = ?;";
+        query = "update maktab.public.users set " +
+                "first_name = ?," +
+                "last_name = ?," +
+                "email = ?," +
+                "password = ?" +
+                " where id = ?;";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        System.out.print("Enter New Password : ");
+        System.out.print("Enter New First Name : ");
         preparedStatement.setString(1, input.next());
+        System.out.print("Enter New Last Name : ");
+        preparedStatement.setString(2, input.next());
+        System.out.print("Enter New Email : ");
+        preparedStatement.setString(3, input.next());
+        System.out.print("Enter New Password : ");
+        preparedStatement.setString(4, input.next());
         System.out.print("Enter ID : ");
-        preparedStatement.setInt(2, input.nextInt());
+        preparedStatement.setInt(5, input.nextInt());
         preparedStatement.executeUpdate();
     }
 
