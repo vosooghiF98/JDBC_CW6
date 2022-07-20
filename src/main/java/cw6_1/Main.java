@@ -30,7 +30,8 @@ public class Main {
                 }
             }
             if (button.equals("delete")){
-                sql.deleteData();
+                System.out.print("Enter ID : ");
+                sql.deleteData(input.nextInt());
             }
             if (button.equals("update")) {
                 sql.updateData();
