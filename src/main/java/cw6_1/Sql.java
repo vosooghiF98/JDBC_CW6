@@ -54,14 +54,11 @@ public class Sql {
         System.out.print("Enter ID : ");
         preparedStatement.setInt(1,input.nextInt());
         ResultSet resultSet = preparedStatement.executeQuery();
-        User user = new User();
         while (resultSet.next()){
-            user.setFirstName(resultSet.getString("first_name"));
-            user.setLastName(resultSet.getString("last_name"));
-            user.setEmail(resultSet.getString("email"));
-            user.setPassword(resultSet.getString("password"));
-            System.out.println(user.getFirstName()+","+user.getLastName()+","+
-                    user.getEmail()+","+user.getPassword());
+            System.out.println(resultSet.getString("first_name"));
+            System.out.println(resultSet.getString("last_name"));
+            System.out.println(resultSet.getString("email"));
+            System.out.println(resultSet.getString("password"));
         }
 
     }
