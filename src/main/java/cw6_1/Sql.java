@@ -19,18 +19,14 @@ public class Sql {
         statement.execute(query);
     }
 
-    public void insertIntoUsersTable() throws SQLException {
+    public void insertIntoUsersTable(User user) throws SQLException {
         query = "insert into maktab.public.users (first_name, last_name, email, password) " +
                 "values (?,?,?,?);";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        System.out.print("Enter First Name : ");
-        preparedStatement.setString(1,input.next());
-        System.out.print("Enter last Name : ");
-        preparedStatement.setString(2,input.next());
-        System.out.print("Enter Email (not necessary!) : ");
-        preparedStatement.setString(3,input.next());
-        System.out.print("Enter Password : ");
-        preparedStatement.setString(4,input.next());
+        preparedStatement.setString(1,user.getFirstName());
+        preparedStatement.setString(2,user.getLastName());
+        preparedStatement.setString(3,user.getEmail());
+        preparedStatement.setString(4, user.getPassword());
         preparedStatement.executeUpdate();
     }
 
@@ -53,8 +49,11 @@ public class Sql {
     }
 
     public void showData() throws SQLException {
-        query = "select * from maktab.public.users;";
-        ResultSet resultSet = statement.executeQuery(query);
+        query = "select * from maktab.public.users where id = ?;";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        System.out.print("Enter ID : ");
+        preparedStatement.setInt(1,input.nextInt());
+        ResultSet resultSet = preparedStatement.executeQuery();
         User user = new User();
         while (resultSet.next()){
             user.setFirstName(resultSet.getString("first_name"));
